@@ -15,11 +15,10 @@ public class InfiniteComputation {
         while (true) {
             long start = System.currentTimeMillis();
             for (int i = 0; i < 1_000_000; i++) {
-                result = sqrt(new BigInteger("1234567890"));
-
+                    result = sqrt(new BigInteger("123456789"));
             }
             System.out.printf("%d iteration done, took %d ms, result: %s%n",
-                ++iteration, System.currentTimeMillis() - start, result.toString());
+                ++iteration, System.currentTimeMillis() - start, result);
         }
     }
 

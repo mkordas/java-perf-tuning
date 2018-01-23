@@ -12,8 +12,6 @@ package com.luxoft.jpt.course.memory.oome;
 
 /**
  * Computes the n-th Fibonaci element either recursive or iterative to test StackOverFlowError
- *
- * @author IBalosin
  */
 public class StackOverFlowError {
 
