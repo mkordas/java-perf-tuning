@@ -1,7 +1,37 @@
 apply plugin: "java"
+
 repositories {
     jcenter()
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.sf.proguard', name: 'proguard-gradle', version: '5.3.3'
+    }
+}
+
 dependencies {
     compile group: 'org.jdom', name: 'jdom', version: '2.0.2'
+}
+
+task proguard(type: proguard.gradle.ProGuardTask, dependsOn: 'jar') {
+    ext {
+        outDir = file("${buildDir}/proguard")
+        obfuscatedJar = "${outDir}/${jar.baseName}.jar"
+    }
+    outDir.mkdirs()
+
+    injars jar.archivePath
+    outjars obfuscatedJar
+
+    printmapping "${outDir}/mappings.out"
+    libraryjars configurations.compile
+    configuration 'proguard.pro'
+
+    doLast {
+        logger.lifecycle "[Proguard] Generated obfuscated JAR in ${obfuscatedJar}"
+    }
 }
